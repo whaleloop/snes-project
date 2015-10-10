@@ -1,0 +1,14 @@
+{
+  "name": "snes-project",
+  "version": "1.0.0",
+  "description": "sftp server to raspberry pi",
+  "main": "sftpTest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ssh2": "^0.4.11"
+  }
+}
