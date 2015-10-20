@@ -1,0 +1,6 @@
+./*.js
+./db/*.js
+
+--require chai
+--reporter mocha-spec-cov
+--colors

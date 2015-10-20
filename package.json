@@ -1,14 +1,28 @@
 {
   "name": "snes-project",
   "version": "1.0.0",
-  "description": "sftp server to raspberry pi",
-  "main": "sftpTest.js",
+  "description": "Web Server for easy upload of ROMs to emulation station",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "./node_modules/.bin/mocha"
   },
-  "author": "",
+  "author": "Whale Loop",
   "license": "ISC",
   "dependencies": {
-    "ssh2": "^0.4.11"
+    "body-parser": "1.14.1",
+    "chai": "^3.3.0",
+    "eslint": "1.7.2",
+    "express": "4.13.3",
+    "ghooks": "0.3.2",
+    "mocha": "2.3.3",
+    "mocha-spec-cov": "0.0.3",
+    "ssh2": "0.4.11"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "echo 'Committing...'",
+      "pre-push": "echo 'Push it, push it real good!'"
+    }
   }
 }

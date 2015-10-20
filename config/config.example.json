@@ -1,0 +1,4 @@
+{
+	"databaseUrl": "postgres://<username>:<password>@localhost/<database>",
+	"port": 8888
+}

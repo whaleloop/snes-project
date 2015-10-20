@@ -1,2 +1,4 @@
 node_modules
 roms
+test/npm-debug.js
+config/config.json
