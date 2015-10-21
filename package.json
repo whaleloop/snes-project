@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha",
+    "migrate": "node ./db/migrate.js"
   },
   "author": "Whale Loop",
   "license": "ISC",
@@ -17,6 +18,8 @@
     "ghooks": "0.3.2",
     "mocha": "2.3.3",
     "mocha-spec-cov": "0.0.3",
+    "pg-promise": "^2.1.0",
+    "promise": "^7.0.4",
     "ssh2": "0.4.11"
   },
   "config": {

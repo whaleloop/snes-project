@@ -8,6 +8,7 @@
 		server,
 		port;
 
+	// check to see if environment variable needs to be set up
 	if (!process.env.PORT) {
 		config.setupEnvironmentVariables();
 	}
