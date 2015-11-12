@@ -6,5 +6,5 @@
 * `npm install`
 
 ## Available Commands
-* `npm run start` - starts the server
-* `npm run test` - runs unit tests
+* `npm start` - starts the server
+* `npm test` - runs unit tests
