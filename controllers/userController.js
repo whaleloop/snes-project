@@ -16,24 +16,40 @@ router.use(function timeLog(req, res, next) {
 	next();
 });
 
+function errorHandler (res, status, error) {
+	return res.status(status).json({
+		error: error
+	});
+}
+
 function createUser (req, res) {
-	if (req.body.email_address && req.body.password) {
-		// need to validate webtoken first
-		UserService.createUser(req.body).then(function () {
-			res.status(201).json({
-				access_token: JsonWebToken.sign(user, process.env[envKeys[0]], { expiresIn: 360000 })
-			});
+	try {
+		// decode webtoken
+		var decoded = JsonWebToken.verify(req.headers['access-token'], process.env[envKeys[0]]);
+		// if webtoken doesnt trigger catch check if user is in db already
+		UserService.getUserByEmail(req.body.email_address).then(function (result) {
+			if (req.body.email_address === result.email_address) {
+				errorHandler(res, 401, 'User account already exists.');
+				// user exists need to reject promise
+				return Promise.reject('User Exists');
+			}
+			// if user doesn't exist create one
+			return UserService.createUser(req.body);
+		}).then(function (user) {
+			// return created status
+			res.status(201).send();
 		}).catch(function (error) {
-			res.status(500).json({
-				error: 'Internal Server Error: ' + error
-			});
+			// check if error is string from rejected promise
+			if (error === 'User Exists') {
+				errorHandler(res, 401, 'User account already exists.');
+			} else {
+				// catch all error
+				errorHandler(res, 500, 'Internal Server Error: ' + error);
+			}
 		});
-		
 	}
-	else {
-		res.status(400).json({
-			error: 'Missing Email or Password'
-		});
+	catch(error) {
+		errorHandler(res, 401, error);
 	}
 }
 

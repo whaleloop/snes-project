@@ -9,7 +9,9 @@ var Promise = require('promise'),
 	UserQueries = require('../db/queries.json').user;
 
 function getUserByEmail (email) {
-	return db.one(UserQueries.getByEmail, [email]);
+	return db.any(UserQueries.getByEmail, [email]).then(function (users) {
+		return users.length > 0 ? [0] : {};
+	});
 }
 
 function createUser (user) {
@@ -23,6 +25,7 @@ function createUser (user) {
 		];
 
 	return db.any(UserQueries.add, values);
+	
 }
 
 module.exports = {
