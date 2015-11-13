@@ -7,20 +7,26 @@ var config = require('./config/config.js'),
 	server,
 	port;
 
-// check to see if environment variable needs to be set up
-if (!process.env.PORT) {
-	config.setupEnvironmentVariables();
+function setupMiddleWare () {
+	var authRouter = require('./controllers/authController'),
+		userRouter = require('./controllers/userController');
+
+	app.use(bodyParser.json());
+	app.use('/', authRouter);
+	app.use('/users', userRouter);
 }
 
-port = process.env.PORT;
-
-app.use(bodyParser.json());
-
 function launchServer () {
-	return app.listen(port, function () {
+	// add in middleware and routes
+	setupMiddleWare();
+	// start server
+	server = app.listen(process.env.PORT, function () {
 		console.log('SNES Server listening on port %s', server.address().port);
 	});
 }
 
-// start server
-server = launchServer();
+
+// start program by checking enviroment variables and database setup then launching server
+config.setupEnvironmentVariables().then(function () {
+	return config.setupDatabase(launchServer);
+});

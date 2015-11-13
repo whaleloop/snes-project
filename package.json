@@ -11,16 +11,20 @@
   "author": "Whale Loop",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "1.14.1",
     "chai": "^3.3.0",
+    "child-process-promise": "^1.1.0",
     "eslint": "1.7.2",
     "express": "4.13.3",
     "ghooks": "0.3.2",
+    "jsonwebtoken": "^5.4.1",
     "mocha": "2.3.3",
     "mocha-spec-cov": "0.0.3",
     "pg-promise": "^2.1.0",
     "promise": "^7.0.4",
-    "ssh2": "0.4.11"
+    "ssh2": "0.4.11",
+    "uuid": "^2.0.1"
   },
   "config": {
     "ghooks": {

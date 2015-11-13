@@ -1,0 +1,6 @@
+{
+	"user": {
+		"getByEmail": "SELECT * FROM user_account WHERE email_address=$1;",
+		"add": "INSERT INTO user_account (user_account_uuid, email_address, hashed_password, salt) VALUES ($1, $2, $3, $4);"
+	}
+}

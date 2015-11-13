@@ -2,42 +2,34 @@
 
 var pg = require('pg-promise')(),
 	config = require('../config/config.js'),
-	conString, 
+	dbKey = 'DATABASE_URL', 
 	db,
-	Promise = require('promise');
+	Promise = require('promise'),
+	migrations = require('./migrations.json').migrations;
 
 // check to see if environment variable needs to be set up
 if (!process.env.DATABASE_URL) {
 	config.setupEnvironmentVariables();
 }
 
-conString = process.env.DATABASE_URL;
-db = pg(conString);
+db = pg(process.env[dbKey]);
 
 function errorHandler (error) {
 	console.log('ERROR: ', error);
 }
 
-// // test connection
-var connection;
-db.connect().then(function (response) {
-	connection = response;
-	console.log('connection: ', response);
-	process.exit();
+// migrate db
+db.tx(function(){
+   var promises = [];
+
+   for (var i=0; i<migrations.length; i++) {
+       promises.push(this.none(migrations[i]));
+   }
+
+   return Promise.all(promises).then(function() {
+       console.log('Migrations Complete');
+   });
+}).then(function(){
+   // close the connection to db
+   pg.end();
 }, errorHandler);
-
-// // migrate db
-//    db.tx(function(){
-//        var promises = [];
-
-//        for (var i=0; i<migrations.length; i++) {
-//            promises.push(this.none(migrations[i]));
-//        }
-
-//        return Promise.all(promises).then(function() {
-//            console.log('Migrations Complete');
-//        });
-//    }).then(function(){
-//        // close the connection to db
-//        pg.end();
-//    }, errorHandler);

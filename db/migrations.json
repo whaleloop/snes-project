@@ -1,0 +1,5 @@
+{
+	"migrations": [
+		"CREATE TABLE IF NOT EXISTS user_account (user_account_id bigserial, user_account_uuid uuid NOT NULL, email_address text UNIQUE NOT NULL, hashed_password varchar(60), salt varchar(60), created_on_ts timestamp NOT NULL DEFAULT (now() at time zone 'utc'), modified_on_ts timestamp NOT NULL DEFAULT (now() at time zone 'utc'), CONSTRAINT pk_user_account PRIMARY KEY(user_account_id));"
+	]
+}
