@@ -7,4 +7,5 @@
 
 ## Available Commands
 * `npm start` - starts the server
-* `npm test` - runs unit tests
+* `npm run test` - runs unit tests
+* `npm run migrate` - runs migrations
