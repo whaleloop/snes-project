@@ -1,5 +1,5 @@
 {
-  "name": "snes-project",
+  "name": "whaleloop",
   "version": "1.0.0",
   "description": "Web Server for easy upload of ROMs to emulation station",
   "main": "app.js",
@@ -17,19 +17,16 @@
     "child-process-promise": "^1.1.0",
     "eslint": "1.7.2",
     "express": "4.13.3",
-    "ghooks": "0.3.2",
     "jsonwebtoken": "^5.4.1",
     "mocha": "2.3.3",
     "mocha-spec-cov": "0.0.3",
     "pg-promise": "^2.1.0",
     "promise": "^7.0.4",
+    "shelljs": "^0.5.3",
     "ssh2": "0.4.11",
     "uuid": "^2.0.1"
   },
-  "config": {
-    "ghooks": {
-      "pre-commit": "echo 'Committing...'",
-      "pre-push": "echo 'Push it, push it real good!'"
-    }
+  "bin": {
+    "whaleloop": "./util/commands.js"
   }
 }
